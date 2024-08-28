@@ -59,7 +59,6 @@ const handleImageUpload = (event) => {
             if (code) {
               setQrCode(code.data);
               setColor(getRandomColor())
-              // Handle the detected QR code here
             } else {
               alert('check-in.qrNotFound');
             }
