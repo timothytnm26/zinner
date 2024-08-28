@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 import './App.css'
-import React, { useRef } from 'react';
+import  { useRef } from 'react';
 import jsQR from 'jsqr';
 
 import { Scanner } from '@yudiel/react-qr-scanner'
@@ -20,7 +20,7 @@ function App() {
 
    const fileInputRef = useRef(null);
 
-  const handleImageUpload = (event) => {
+const handleImageUpload = (event) => {
     event.preventDefault();
     event.stopPropagation();
     const file = event.target.files?.[0];
@@ -57,12 +57,11 @@ function App() {
             );
 
             if (code) {
-              onDetected(code.data);
-              setQrCode(code.data)
+              setQrCode(code.data);
               setColor(getRandomColor())
               // Handle the detected QR code here
             } else {
-              alert(t('check-in.qrNotFound'));
+              alert('check-in.qrNotFound');
             }
           }
         };
