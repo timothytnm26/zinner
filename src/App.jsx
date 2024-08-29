@@ -13,7 +13,7 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 const SPREADSHEET_ID = import.meta.env.VITE_SPREADSHEET_ID;
 const SHEET_ID = import.meta.env.VITE_SHEET_ID
 const CLIENT_EMAIL =  import.meta.env.VITE_GOOGLE_SERVICE_ACCOUNT_EMAIL
-const PRIVATE_KEY = import.meta.env.VITE_GOOGLE_PRIVATE_KEY.replace(/\n/g, '\n')
+// const PRIVATE_KEY = import.meta.env.VITE_GOOGLE_PRIVATE_KEY.replace(/\n/g, '\n')
 const API_KEY = import.meta.env.API_KEY
 
 console.log({SPREADSHEET_ID})
