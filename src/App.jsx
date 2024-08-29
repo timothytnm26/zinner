@@ -6,7 +6,6 @@ import jsQR from 'jsqr';
 
 import { Scanner } from '@yudiel/react-qr-scanner'
 import useGoogleSheets from 'use-google-sheets';
-import { GoogleSpreadsheet } from 'google-spreadsheet';
 
 
 // Config variables
