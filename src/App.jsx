@@ -44,7 +44,7 @@ function App() {
         }}
       />
       <div className="content">
-        {cur && <div className="user-code">{cur.code}</div>}
+        <div className="user-code">{qrCode}</div>
         {cur && (
           <div className="user-info">
             <div>{cur.name}</div>
