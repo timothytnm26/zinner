@@ -1,42 +1,67 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.wrapper {
+  display: flex;
+  position: unset;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.zinner-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url(./../public/zinner.png) repeat center;
+  background-size: 400px;
+  background-blend-mode: multiply;
+  width: 100vw;
+  height: 100vh;
+  transform-origin: center;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.content {
+  z-index: 100;
+  background-color: #ff6f4c;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  font-size: 48px;
+  font-weight: 700;
+  min-height: 72px;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.user-code {
+  height: 72px;
 }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.user-info {
+  font-size: 28px;
+  align-self: flex-start;
+  padding: 10px;
+  background-color: white;
+  width: 100%;
+  color: #ff6f4c;
+  display: flex;
+  flex-direction: column;
+}
+.scanner-container {
+  svg {
+    border: none !important;
+    animation: zoom-in-zoom-out 2s ease infinite;
   }
-  to {
-    transform: rotate(360deg);
+  svg path {
+    stroke: #82ff82;
   }
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media screen and (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+    max-width: 80vw;
+    gap: 20px;
   }
 }
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(0.9, 0.9);
+  }
+  50% {
+    transform: scale(0.95, 0.95);
+  }
+  100% {
+    transform: scale(0.9, 0.9);
+  }
 }
