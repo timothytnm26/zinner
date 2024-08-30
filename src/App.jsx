@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { useRef } from "react";
-import jsQR from "jsqr";
 
 import { Scanner } from "@yudiel/react-qr-scanner";
 import useGoogleSheets from "use-google-sheets";
 
-// Config variables
-const SPREADSHEET_ID = import.meta.env.VITE_SPREADSHEET_ID;
-const SHEET_ID = import.meta.env.VITE_SHEET_ID;
-const CLIENT_EMAIL = import.meta.env.VITE_GOOGLE_SERVICE_ACCOUNT_EMAIL;
-// const PRIVATE_KEY = import.meta.env.VITE_GOOGLE_PRIVATE_KEY.replace(/\n/g, '\n')
-const API_KEY = import.meta.env.API_KEY;
 const API_POST_TO_SPREADSHEET_URL =
-  "https://script.google.com/macros/s/AKfycbw6l4jodfxz5qnkKpbu-TuGHFKTV-WBe1js78mEsuTaUnEqUXpzcesbsT_eaYorOhptsg/exec";
+  "https://script.google.com/macros/s/AKfycbxA0V4cQ2CzBBZq8a048GdyskXkKosX6vz4wjwDNOmj0jpbH3qfG1nVuY7R_cl4jDW-Bg/exec";
 function App() {
   const [qrCode, setQrCode] = useState("");
   const { data, refetch } = useGoogleSheets({
@@ -23,7 +15,7 @@ function App() {
   });
 
   const [cur, setCur] = useState();
-
+  const [err, setErr] = useState(undefined);
   const postCodeToSheet = (code) => {
     const formData = new FormData();
     formData.append("code", code);
@@ -33,10 +25,6 @@ function App() {
       mode: "no-cors",
       body: formData,
     })
-      .then((res) => {
-        console.log("Response received:", res);
-        return res.json();
-      })
       .then((data) => {
         console.log("Data:", data);
       })
@@ -48,7 +36,12 @@ function App() {
   useEffect(() => {
     const userList = data[0]?.data;
     const curUser = userList?.filter((user) => user.code === qrCode)[0];
+    if (!curUser && qrCode !== "") {
+      setErr("QR KHÔNG ĐÚNG");
+      return;
+    }
     setCur(curUser);
+    setErr(undefined);
   }, [qrCode]);
 
   useEffect(() => {
@@ -65,18 +58,29 @@ function App() {
         onScan={(result) => {
           setQrCode(result[0].rawValue);
         }}
-        allowMultiple
         scanDelay={1000}
         classNames={{
           container: "scanner-container",
         }}
       />
       <div className="content">
-        <div className="user-code">{qrCode}</div>
+        <div
+          className={`user-code ${cur?.isChecked > 0 ? "have-checked" : "ok"}`}
+        >
+          {err && err}
+          {qrCode}
+        </div>
         {cur && (
           <div className="user-info">
             <div>{cur.name}</div>
             <div>{cur.phone}</div>
+            <div
+              className={`checked-tag ${
+                cur?.isChecked > 0 ? "have-checked" : "ok"
+              }`}
+            >
+              {cur?.isChecked > 0 ? "ĐÃ CHECKIN" : "THÀNH CÔNG"}
+            </div>
           </div>
         )}
       </div>

@@ -8,7 +8,7 @@
   left: 0;
   background: url(/zinner.png) repeat center;
   background-size: 400px;
-  background-blend-mode: multiply;
+  filter: grayscale(1);
   width: 100vw;
   height: 100vh;
   transform-origin: center;
@@ -16,7 +16,7 @@
 }
 .content {
   z-index: 100;
-  background-color: #ff6f4c;
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -38,6 +38,7 @@
   color: #ff6f4c;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .scanner-container {
   svg {
@@ -65,4 +66,18 @@
   100% {
     transform: scale(0.9, 0.9);
   }
+}
+
+.have-checked {
+  color: red;
+}
+
+.ok {
+  color: green;
+}
+.checked-tag {
+  position: absolute;
+  right: 0;
+  bottom: 20%;
+  transform: rotate(-10deg) translate(-10%, -10%);
 }
