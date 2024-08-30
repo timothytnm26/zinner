@@ -25,6 +25,7 @@
   font-size: 48px;
   font-weight: 700;
   min-height: 72px;
+  min-width: 500px;
 }
 .user-code {
   height: 72px;
@@ -55,6 +56,9 @@
     max-width: 80vw;
     gap: 20px;
   }
+  .content {
+    min-width: unset;
+  }
 }
 @keyframes zoom-in-zoom-out {
   0% {
@@ -74,10 +78,4 @@
 
 .ok {
   color: green;
-}
-.checked-tag {
-  position: absolute;
-  right: 0;
-  bottom: 20%;
-  transform: rotate(-10deg) translate(-10%, -10%);
 }
