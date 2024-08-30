@@ -54,6 +54,7 @@ function App() {
   useEffect(() => {
     if (cur?.code) {
       postCodeToSheet(cur.code);
+      refetch();
     }
   }, [cur]);
 
