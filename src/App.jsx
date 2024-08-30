@@ -12,7 +12,8 @@ const SHEET_ID = import.meta.env.VITE_SHEET_ID;
 const CLIENT_EMAIL = import.meta.env.VITE_GOOGLE_SERVICE_ACCOUNT_EMAIL;
 // const PRIVATE_KEY = import.meta.env.VITE_GOOGLE_PRIVATE_KEY.replace(/\n/g, '\n')
 const API_KEY = import.meta.env.API_KEY;
-
+const API_POST_TO_SPREADSHEET_URL =
+  "https://script.google.com/macros/s/AKfycbw6l4jodfxz5qnkKpbu-TuGHFKTV-WBe1js78mEsuTaUnEqUXpzcesbsT_eaYorOhptsg/exec";
 function App() {
   const [qrCode, setQrCode] = useState("");
   const { data, refetch } = useGoogleSheets({
@@ -22,12 +23,36 @@ function App() {
   });
 
   const [cur, setCur] = useState();
+
+  const postCodeToSheet = (code) => {
+    const formData = new FormData();
+    formData.append("code", code);
+
+    fetch(API_POST_TO_SPREADSHEET_URL, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => {
+        console.log("Response received:", res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Data:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
   // check code
   useEffect(() => {
     const userList = data[0]?.data;
     const curUser = userList?.filter((user) => user.code === qrCode)[0];
     setCur(curUser);
-    refetch();
+
+    //
+    if (curUser?.code) {
+      postCodeToSheet(curUser.code);
+    }
   }, [qrCode]);
 
   return (

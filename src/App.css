@@ -6,12 +6,13 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: url(./../public/zinner.png) repeat center;
+  background: url(/zinner.png) repeat center;
   background-size: 400px;
   background-blend-mode: multiply;
   width: 100vw;
   height: 100vh;
   transform-origin: center;
+  z-index: -1;
 }
 .content {
   z-index: 100;
