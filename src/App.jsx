@@ -30,6 +30,7 @@ function App() {
 
     fetch(API_POST_TO_SPREADSHEET_URL, {
       method: "POST",
+      mode: "no-cors",
       body: formData,
     })
       .then((res) => {
