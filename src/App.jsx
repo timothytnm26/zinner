@@ -48,13 +48,12 @@ function App() {
     const userList = data[0]?.data;
     const curUser = userList?.filter((user) => user.code === qrCode)[0];
     setCur(curUser);
-
-    //
+  }, [qrCode]);
+  useEffect(() => {
     if (curUser?.code) {
       postCodeToSheet(curUser.code);
     }
-  }, [qrCode]);
-
+  }, [curUser]);
   return (
     <div className="wrapper">
       <div className="zinner-logo" />
