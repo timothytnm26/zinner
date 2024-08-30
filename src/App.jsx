@@ -79,7 +79,7 @@ function App() {
                 cur?.isChecked > 0 ? "have-checked" : "ok"
               }`}
             >
-              {cur?.isChecked > 0 ? "ĐÃ CHECKIN" : "THÀNH CÔNG"}
+              {cur?.isChecked > 0 ? "VÉ ĐÃ CHECK-IN" : "THÀNH CÔNG"}
             </div>
           </div>
         )}
